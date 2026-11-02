@@ -1,0 +1,100 @@
+/* ============================================================
+   1. TARJETAS DE HABILIDAD (.skill-card)
+   ============================================================ */
+/* Estilo de las tarjetas de habilidades: padding, fondo claro,
+   bordes redondeados, texto centrado y negrita. */
+.skill-card {
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  background: #f3f4f6;          /* fondo claro en modo día */
+  text-align: center;
+  font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* animación suave */
+}
+
+/* Efecto hover: la tarjeta sube 4px y muestra sombra */
+.skill-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+/* En modo oscuro: fondo oscuro para la tarjeta */
+.dark .skill-card {
+  background: #1f2937;
+}
+
+
+/* ============================================================
+   2. TARJETAS DE PROYECTO (.project-card)
+   ============================================================ */
+/* Tarjeta de proyecto: flexbox en columna, fondo blanco, borde,
+   bordes redondeados y transición suave. */
+.project-card {
+  background: #ffffff;          /* fondo en modo día */
+  border: 1px solid #e5e7eb;    /* borde gris claro */
+  border-radius: 0.75rem;
+  overflow: hidden;             /* recorta la imagen a los bordes */
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;                /* Flexbox */
+  flex-direction: column;       /* columna: imagen arriba, texto abajo */
+}
+
+/* Efecto hover: eleva la tarjeta y muestra sombra */
+.project-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+}
+
+/* Imagen del proyecto: ocupa todo el ancho, alto fijo, recorte cover */
+.project-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+/* En modo oscuro: fondo y borde oscuros */
+.dark .project-card {
+  background: #1f2937;
+  border-color: #374151;
+}
+
+
+/* ============================================================
+   3. ANIMACIONES (@keyframes fadeIn)
+   ============================================================ */
+/* Animación de entrada: de invisible a visible con desplazamiento */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Clase que aplica la animación inmediatamente */
+.animate-fade-in { animation: fadeIn 0.8s ease forwards; }
+
+/* Clase con retraso de 0.2s (para la foto de perfil) */
+.animate-fade-in-delay { animation: fadeIn 0.8s ease 0.2s forwards; opacity: 0; }
+
+
+/* ============================================================
+   4. SUBRAYADO ANIMADO EN ENLACES DE NAVEGACIÓN
+   ============================================================ */
+/* Enlace de navegación con posición relativa para el subrayado */
+.nav-link { position: relative; }
+
+/* Subrayado que crece de 0 a 100% al pasar el mouse */
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: -4px;
+  width: 0; height: 2px;
+  background: #2563eb;
+  transition: width 0.2s ease;
+}
+.nav-link:hover::after { width: 100%; }
+
+
+/* ============================================================
+   5. ESTADO DE ERROR EN CAMPOS DEL FORMULARIO
+   ============================================================ */
+/* Borde rojo para campos con error de validación */
+.input-error { border-color: #ef4444 !important; }

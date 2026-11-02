@@ -1,0 +1,10 @@
+[
+  {
+    "title": "ViaSegura · Educación Vial",
+    "description": "Plataforma web educativa sobre seguridad vial: estadísticas, normas de tránsito, señales, simulación y buenas prácticas para conductores y peatones. Incluye autenticación y panel administrativo.",
+    "tech": ["Python", "Flask", "MySQL", "Materialize", "JavaScript"],
+    "image": "https://picsum.photos/seed/viasegura/600/400",
+    "demo": "#",
+    "repo": "#"
+  }
+]
