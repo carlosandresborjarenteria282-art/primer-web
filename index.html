@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!--
+    ARCHIVO: index.html
+    PROPÓSITO: Página principal del portafolio (hoja de vida interactiva).
+    QUÉ HACE: Define la estructura semántica (header, nav, main, footer) y las secciones
+              Sobre mí, Habilidades, Proyectos y Contacto. Enlaza Tailwind CSS (CDN),
+              los estilos propios (css/styles.css) y la lógica (js/main.js).
+    PARA QUÉ SIRVE: Es el esqueleto de la página que el navegador renderiza.
+  -->
+  <meta charset="UTF-8" /> <!-- Codificación de caracteres (acentos y ñ) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Adapta la página a móviles -->
+  <title>Portafolio | Hoja de Vida</title> <!-- Título que aparece en la pestaña del navegador -->
+  <meta name="description" content="Sitio web personal interactivo - Hoja de vida y portafolio de proyectos." /> <!-- Descripción para buscadores -->
+
+  <!-- Configuración de Tailwind CSS (CDN) + modo oscuro por clase -->
+  <script src="https://cdn.tailwindcss.com"></script> <!-- Carga Tailwind desde internet -->
+  <script>
+    // Configuración de Tailwind: modo oscuro por clase y colores personalizados (brand)
+    tailwind.config = {
+      darkMode: 'class', // el modo oscuro se activa agregando la clase 'dark' a <html>
+      theme: {
+        extend: {
+          colors: {
+            brand: { 50:'#eff6ff',100:'#dbeafe',500:'#3b82f6',600:'#2563eb',700:'#1d4ed8' } // paleta azul propia
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Estilos personalizados propios (animaciones, cards, etc.) -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300">
+  <!-- ===================== ENCABEZADO Y NAVEGACIÓN ===================== -->
+  <!-- Header fijo en la parte superior: contiene logo y menú -->
+  <header class="sticky top-0 z-40 backdrop-blur bg-white/80 dark:bg-gray-900/80 border-b border-gray-200 dark:border-gray-800">
+    <!-- Barra de navegación principal (accesible) -->
+    <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16" aria-label="Navegación principal">
+      <a href="#inicio" class="text-xl font-bold text-brand-600 dark:text-brand-500">Mi Portafolio</a> <!-- Logo que lleva al inicio -->
+      <!-- Menú de escritorio: se oculta en pantallas pequeñas (md:flex) -->
+      <div class="hidden md:flex items-center gap-6">
+        <a href="#sobre-mi" class="nav-link hover:text-brand-600 transition">Sobre mí</a> <!-- Enlace a sección Sobre mí -->
+        <a href="#proyectos" class="nav-link hover:text-brand-600 transition">Proyectos</a> <!-- Enlace a Proyectos -->
+        <a href="#habilidades" class="nav-link hover:text-brand-600 transition">Habilidades</a> <!-- Enlace a Habilidades -->
+        <a href="#contacto" class="nav-link hover:text-brand-600 transition">Contacto</a> <!-- Enlace a Contacto -->
+        <!-- Botón para cambiar entre modo claro y oscuro (escritorio) -->
+        <button id="themeToggle" type="button" aria-label="Cambiar tema" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition">
+          <span id="themeIcon">🌙</span> <!-- Icono del tema actual -->
+        </button>
+      </div>
+      <!-- Botones visibles solo en móvil: tema + hamburguesa -->
+      <div class="md:hidden flex items-center gap-2">
+        <button id="themeToggleMobile" type="button" aria-label="Cambiar tema" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition">🌙</button> <!-- Tema en móvil -->
+        <!-- Botón hamburguesa para abrir/cerrar el menú móvil -->
+        <button id="menuBtn" type="button" aria-label="Abrir menú" aria-expanded="false" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </nav>
+    <!-- Menú móvil desplegable: oculto por defecto (clase 'hidden') -->
+    <div id="mobileMenu" class="md:hidden hidden border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
+      <div class="px-4 py-3 flex flex-col gap-2">
+        <a href="#sobre-mi" class="py-2 hover:text-brand-600 transition">Sobre mí</a>
+        <a href="#proyectos" class="py-2 hover:text-brand-600 transition">Proyectos</a>
+        <a href="#habilidades" class="py-2 hover:text-brand-600 transition">Habilidades</a>
+        <a href="#contacto" class="py-2 hover:text-brand-600 transition">Contacto</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="inicio"> <!-- Contenido principal de la página -->
+    <!-- ===================== SECCIÓN: SOBRE MÍ (HERO) ===================== -->
+    <!-- Presentación personal: nombre, rol, descripción y foto -->
+    <section id="sobre-mi" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+      <div class="grid md:grid-cols-2 gap-10 items-center"> <!-- 2 columnas en desktop -->
+        <!-- Columna de texto: nombre, rol, descripción y botones de acción -->
+        <div class="animate-fade-in">
+          <p class="text-brand-600 dark:text-brand-500 font-semibold mb-2">Hola, soy</p>
+          <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mb-4">Carlos Andres Borja Renteria</h1> <!-- Nombre del autor -->
+          <h2 class="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-6">Desarrollador Web &amp; Diseñador UI</h2> <!-- Rol profesional -->
+          <p class="text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
+            Profesional apasionado por crear experiencias digitales accesibles, rápidas y con buen diseño.
+            Me especializo en front-end moderno, con foco en usabilidad, rendimiento y código limpio.
+            Este sitio es mi hoja de vida interactiva: aquí encontrarás mi perfil, proyectos y formas de contacto.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <a href="#proyectos" class="px-6 py-3 bg-brand-600 text-white rounded-lg hover:bg-brand-700 transition shadow">Ver proyectos</a> <!-- Va a la sección de proyectos -->
+            <a href="#contacto" class="px-6 py-3 border border-brand-600 text-brand-600 dark:text-brand-500 rounded-lg hover:bg-brand-50 dark:hover:bg-gray-800 transition">Contáctame</a> <!-- Va al formulario -->
+          </div>
+        </div>
+        <!-- Columna de imagen: foto de perfil con badge "Disponible" -->
+        <div class="flex justify-center animate-fade-in-delay">
+          <div class="relative">
+            <div class="w-64 h-64 md:w-80 md:h-80 rounded-full bg-gradient-to-br from-brand-500 to-purple-500 p-1 shadow-2xl">
+              <img src="assets/mi-foto.jpeg" alt="Foto de perfil de Carlos Andres Borja Renteria" class="w-full h-full rounded-full bg-white dark:bg-gray-800 object-cover" /> <!-- Foto del autor -->
+            </div>
+            <span class="absolute -bottom-2 -right-2 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow">Disponible</span> <!-- Estado de disponibilidad -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SECCIÓN: HABILIDADES ===================== -->
+    <!-- Lista de tecnologías que domina el autor -->
+    <section id="habilidades" class="bg-white dark:bg-gray-800/50 py-16">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold mb-2">Habilidades</h2>
+        <p class="text-gray-600 dark:text-gray-400 mb-8">Tecnologías y herramientas con las que trabajo.</p>
+        <!-- Grid responsive: 2 col móvil, 3 tablet, 4 desktop -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+          <div class="skill-card">HTML5</div> <!-- Tarjeta de habilidad -->
+          <div class="skill-card">CSS3 / Tailwind</div>
+          <div class="skill-card">JavaScript</div>
+          <div class="skill-card">Flexbox &amp; Grid</div>
+          <div class="skill-card">Bootstrap</div>
+          <div class="skill-card">Responsive Design</div>
+          <div class="skill-card">Git &amp; GitHub</div>
+          <div class="skill-card">Accesibilidad</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SECCIÓN: PROYECTOS ===================== -->
+    <!-- Muestra los proyectos cargados desde JSON con filtro -->
+    <section id="proyectos" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
+        <div>
+          <h2 class="text-3xl font-bold mb-2">Proyectos</h2>
+          <p class="text-gray-600 dark:text-gray-400">Cargados dinámicamente desde un archivo JSON.</p>
+        </div>
+        <!-- Campo de búsqueda para filtrar proyectos por nombre/tecnología -->
+        <div class="flex gap-2">
+          <input id="filterInput" type="search" placeholder="Filtrar por nombre o tecnología..." class="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-brand-500" />
+        </div>
+      </div>
+      <!-- Contenedor donde se inyectan las tarjetas (aria-live anuncia cambios a lectores de pantalla) -->
+      <div id="projectsContainer" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" role="list" aria-live="polite">
+        <p class="text-gray-500">Cargando proyectos…</p> <!-- Mensaje mientras carga -->
+      </div>
+      <p id="noResults" class="hidden text-center text-gray-500 mt-6">No se encontraron proyectos.</p> <!-- Mensaje si no hay coincidencias -->
+    </section>
+
+    <!-- ===================== SECCIÓN: CONTACTO ===================== -->
+    <!-- Formulario para que los visitantes envíen un mensaje -->
+    <section id="contacto" class="bg-white dark:bg-gray-800/50 py-16">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold mb-2">Contacto</h2>
+        <p class="text-gray-600 dark:text-gray-400 mb-8">¿Tienes un proyecto en mente? Escríbeme.</p>
+        <!-- Formulario con validación en JS (novalidate desactiva la validación nativa) -->
+        <form id="contactForm" novalidate class="space-y-5">
+          <div class="grid sm:grid-cols-2 gap-5"> <!-- 2 columnas en tablet+ -->
+            <div>
+              <label for="nombre" class="block text-sm font-medium mb-1">Nombre</label> <!-- Etiqueta del campo -->
+              <input id="nombre" name="nombre" type="text" required minlength="2" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-brand-500" /> <!-- Campo de nombre -->
+              <p class="error-msg text-red-500 text-sm mt-1 hidden" data-for="nombre"></p> <!-- Mensaje de error -->
+            </div>
+            <div>
+              <label for="email" class="block text-sm font-medium mb-1">Email</label>
+              <input id="email" name="email" type="email" required class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-brand-500" /> <!-- Campo de email -->
+              <p class="error-msg text-red-500 text-sm mt-1 hidden" data-for="email"></p>
+            </div>
+          </div>
+          <div>
+            <label for="asunto" class="block text-sm font-medium mb-1">Asunto</label>
+            <input id="asunto" name="asunto" type="text" required minlength="3" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-brand-500" />
+            <p class="error-msg text-red-500 text-sm mt-1 hidden" data-for="asunto"></p>
+          </div>
+          <div>
+            <label for="mensaje" class="block text-sm font-medium mb-1">Mensaje</label>
+            <textarea id="mensaje" name="mensaje" rows="5" required minlength="10" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-brand-500"></textarea> <!-- Área de texto -->
+            <p class="error-msg text-red-500 text-sm mt-1 hidden" data-for="mensaje"></p>
+          </div>
+          <button type="submit" class="px-6 py-3 bg-brand-600 text-white rounded-lg hover:bg-brand-700 transition shadow font-semibold">Enviar mensaje</button> <!-- Botón de envío -->
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== PIE DE PÁGINA ===================== -->
+  <!-- Footer con copyright y enlaces a redes sociales -->
+  <footer class="border-t border-gray-200 dark:border-gray-800 py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-500">
+      <p>© 2026 Carlos Andres Borja Renteria. Todos los derechos reservados.</p> <!-- Copyright -->
+      <div class="flex gap-4">
+        <a href="#" class="hover:text-brand-600 transition">GitHub</a> <!-- Enlace a GitHub -->
+        <a href="#" class="hover:text-brand-600 transition">LinkedIn</a> <!-- Enlace a LinkedIn -->
+        <a href="#" class="hover:text-brand-600 transition">Twitter</a> <!-- Enlace a Twitter -->
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script con la lógica del sitio (se carga al final del body) -->
+  <script src="js/main.js"></script>
+</body>
+</html>
